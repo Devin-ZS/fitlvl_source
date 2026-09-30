@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider } from './context/LanguageContext';
+import { FontSizeProvider } from './context/FontSizeContext';
 import Navbar from './components/Navbar';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
@@ -44,22 +46,26 @@ function AppRoutes() {
 export default function App() {
   return (
     <ThemeProvider>
-      <AuthProvider>
-        <AppRoutes />
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            style: {
-              background: 'var(--bg-elevated)',
-              color: 'var(--text-primary)',
-              border: '1px solid var(--border-accent)',
-              fontFamily: 'Exo 2, sans-serif',
-              fontSize: '14px',
-            },
-            success: { iconTheme: { primary: 'var(--accent)', secondary: '#fff' } },
-          }}
-        />
-      </AuthProvider>
+      <FontSizeProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <AppRoutes />
+            <Toaster
+              position="top-center"
+              toastOptions={{
+                style: {
+                  background: 'var(--bg-elevated)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid var(--border-accent)',
+                  fontFamily: 'Exo 2, sans-serif',
+                  fontSize: '14px',
+                },
+                success: { iconTheme: { primary: 'var(--accent)', secondary: '#fff' } },
+              }}
+            />
+          </AuthProvider>
+        </LanguageProvider>
+      </FontSizeProvider>
     </ThemeProvider>
   );
 }
